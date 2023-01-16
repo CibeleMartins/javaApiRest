@@ -22,6 +22,12 @@ public class ClienteRepository {
     public List<Cliente> obterTodos() {
         return Clientes;
     }
+
+    /**
+     * Método que acessa um cliente pelo id.
+     * @param id id do cliente a ser acessado.
+     * @return retorna o cliente com o id indicado no parametro.
+     */
     public Optional<Cliente> obterPeloId(Integer id) {
 
         return Clientes.stream().filter(c -> c.getId() == id).findFirst();
@@ -32,7 +38,6 @@ public class ClienteRepository {
      * @param cliente cliente a ser cadastrado
      * @return retorna o cliente cadatrado
      */
-
     public Cliente cadastrar(Cliente cliente) {
 
         ultimoId++;
@@ -43,6 +48,10 @@ public class ClienteRepository {
         return cliente;
     }
 
+    /**
+     * Método que deleta cliente da base da dados.
+     * @param id id do cliente a ser deletado.
+     */
     public void deletar(Integer id){
 
         Clientes.removeIf(c -> c.getId() == id);
