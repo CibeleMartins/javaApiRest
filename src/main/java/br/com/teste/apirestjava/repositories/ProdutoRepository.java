@@ -60,6 +60,12 @@ public class ProdutoRepository {
         return produto;
     }
 
+    /**
+     * Método para atualizar o produto na lista.
+     * @param produto produto que será atualizado.
+     * @return retorna o produto após atualizar a lista.
+     */
+
     public Produto atualizar(Produto produto) {
 
         Optional<Produto> produtoEncontrado = obterPorId(produto.getId());
