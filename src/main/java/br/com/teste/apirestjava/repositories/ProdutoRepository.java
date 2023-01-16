@@ -32,11 +32,28 @@ public class ProdutoRepository {
     /**
      * Método que retorna o produto encontrado pelo Id
      * @param id do produto que será localizado
-     * @return um produto
+     * @return retorna um produto caso seja encontrado
      */
     public Optional<Produto> obterPorId(Integer id){
 
         return produtos.stream().filter(p -> p.getId() == id).findFirst();
+    }
+
+    /**
+     * Método para adicionar produto na lista.
+     * @param produto produto que será adicionado a lista.
+     * @return retorna o produto que foi adicionado na lista.
+     */
+    public Produto cadastrar(Produto produto) {
+        
+        ultimoId++;
+        // incrementa o id
+        produto.setId(ultimoId);
+        // passa o id pro produto
+        produtos.add(produto);
+        // passa pra lista que simula o BD
+
+        return produto;
     }
 
 }
