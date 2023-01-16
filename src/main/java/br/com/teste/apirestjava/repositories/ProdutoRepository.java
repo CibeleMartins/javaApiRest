@@ -19,6 +19,7 @@ import br.com.teste.apirestjava.model.Produto;
 @Repository
 public class ProdutoRepository {
 
+    // Simula o banco de dados
     private List<Produto> produtos = new ArrayList<Produto>();
     private Integer ultimoId = 0;
 

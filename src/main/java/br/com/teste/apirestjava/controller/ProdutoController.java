@@ -47,6 +47,12 @@ public class ProdutoController {
         return "Produto de id " + id + " foi removido.";
     }
 
+    /**
+     * Método que atualiza um produto
+     * @param id id do produto a ser atualizado
+     * @param produto produto a ser atualizado
+     * @return retorna o produto atualizado
+     */
     @PutMapping("/{id}")
     public Produto atualizar(@PathVariable Integer id, @RequestBody Produto produto){
 
