@@ -26,4 +26,20 @@ public class ClienteRepository {
 
         return Clientes.stream().filter(c -> c.getId() == id).findFirst();
     }
+
+    /**
+     * Método que cadastra um cliente na base de dados
+     * @param cliente cliente a ser cadastrado
+     * @return retorna o cliente cadatrado
+     */
+
+    public Cliente cadastrar(Cliente cliente) {
+
+        ultimoId++;
+        cliente.setId(ultimoId);
+
+        Clientes.add(cliente);
+
+        return cliente;
+    }
 }
