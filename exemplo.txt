@@ -8,6 +8,10 @@ Modelo OK
 Repositorio de produto OK
     um metodo obterTodos , obterPorId, cadastrar/adicionar, atualizarProduto, deletarProduto
 
-Serviço de produto:
+Serviço de produto: OK
     um metodo obterTodos , obterPorId, cadastrar/adicionar, atualizarProduto, deletarProduto
     OBS: Pode ter regra de negócio ou nao.
+
+Controller de produto:
+    Endpoint principal, recebe as requisições.
+     um metodo obterTodos , obterPorId, cadastrar/adicionar, atualizarProduto, deletarProduto
