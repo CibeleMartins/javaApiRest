@@ -98,8 +98,8 @@ public class ProdutoRepository {
         produtos.removeIf(p -> p.getId() == id);
         // um método que remove de dentro de uma lista de acordo com um filtro/condicao
         // passado.
+     
 
-        System.out.println("Produto de id " + id + " foi removido.");
     }
 
 }
