@@ -2,6 +2,7 @@ package br.com.teste.apirestjava.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +21,9 @@ public class ClienteRepository {
      */
     public List<Cliente> obterTodos() {
         return Clientes;
+    }
+    public Optional<Cliente> obterPeloId(Integer id) {
+
+        return Clientes.stream().filter(c -> c.getId() == id).findFirst();
     }
 }
