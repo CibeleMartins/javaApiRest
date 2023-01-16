@@ -2,8 +2,6 @@ package br.com.teste.apirestjava.model;
 
 public class Produto {
 
-
-    // #region Atributos 
     private Integer id;
 
     private String nome;
