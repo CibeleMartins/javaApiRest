@@ -1,6 +1,7 @@
 package br.com.teste.apirestjava.repositories;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,28 @@ public class ClienteRepository {
         Clientes.add(cliente);
 
         return cliente;
+    }
+
+    /**
+     * Método que atualiza um cliente na base de dados.
+     * @param cliente cliente a ser atualizado.
+     * @return retorna o cliente atualizado.
+     */
+    public Cliente atualizar(Cliente cliente) {
+
+        Optional<Cliente> clienteEncontrado = obterPeloId(cliente.getId());
+
+        if (clienteEncontrado.isEmpty()) {
+
+            throw new InputMismatchException("Cliente não encontrado.");
+        }
+
+        deletar(cliente.getId());
+
+        Clientes.add(cliente);
+
+        return cliente;
+
     }
 
     /**
