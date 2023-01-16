@@ -42,4 +42,10 @@ public class ClienteRepository {
 
         return cliente;
     }
+
+    public void deletar(Integer id){
+
+        Clientes.removeIf(c -> c.getId() == id);
+
+    }
 }
