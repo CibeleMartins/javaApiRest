@@ -6,6 +6,7 @@ public class ErrorMessage {
 
     private Integer statusCode;
     
+    private String mensagem;
 
     
     public ErrorMessage(String titulo, Integer statusCode, String mensagem) {
@@ -38,5 +39,4 @@ public class ErrorMessage {
         this.mensagem = mensagem;
     }
 
-    private String mensagem;
 }

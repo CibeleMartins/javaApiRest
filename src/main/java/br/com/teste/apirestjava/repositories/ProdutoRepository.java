@@ -1,8 +1,6 @@
 package br.com.teste.apirestjava.repositories;
 
-import java.lang.StackWalker.Option;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 
 /**
@@ -15,6 +13,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import br.com.teste.apirestjava.model.Produto;
+import br.com.teste.apirestjava.model.exception.ResourceNotFoundException;
 
 @Repository
 public class ProdutoRepository {
@@ -73,7 +72,8 @@ public class ProdutoRepository {
         // encontrar produto na lista.
 
         if (produtoEncontrado.isEmpty()) {
-            throw new InputMismatchException("Produto não encontrado.");
+            // quando ocorre essa exceção ela é "ouvida pelo handler"
+            throw new ResourceNotFoundException("Produto não encontrado.");
         }
 
         // Remover o produto antigo da lista

@@ -15,3 +15,32 @@ Serviço de produto: OK
 Controller de produto:
     Endpoint principal, recebe as requisições.
      um metodo obterTodos , obterPorId, cadastrar/adicionar, atualizarProduto, deletarProduto
+
+
+
+Anotações Tratamento de Erros
+
+Os tratamentos de erro dentro dessa abordagem pode ser feito com uma Exception um modelo de mensagem de erro e 
+um handler.
+
+A exception é uma classe que geralmente tem o nome de Resource + para que é a exeception 
+(algo nao encontrado/erro no servidor)  + Exception.java
+
+Essa classe tem um metodo que  recebe uma string que consiste numa mensagem de erro que descreve o status code 
+da requisição. Para isso, essa classe deve ter uma anotação chamada @ResponseStatus a qual recebe 
+como parametro "code=HttpStatus. + o nome do erro". Além disso, essa classe deve estender o RuntimeException 
+e chamar o super() dentro de um método criado dentro dela que recebe a mensagem de erro e passar no parametro 
+do super a mensagem.
+
+O modelo de erro deve ser uma classe com getters e setters na qual voce faz o molde do erro através de propriedades.
+ Essa classe deve ter um constructor para receber o valor destas propriedades quando for instanciada, visto que a 
+ definição delas e feita de maneira privada.
+
+O Handler é uma classe que fica esperando alguma exceção acontecer na aplicação. Essa classe deve receber uma 
+anotação do tipo @ControllerAdvice que define a classe como um controlador.
+
+O handler deve ter um método o qual recebe a anotacao @ExceptionHandler e em seu parametro recebe a classe de 
+excecao que foi criada + .class. Essa anotacao faz com que esse método fique esperando acontecer ou ser executada 
+a excecao que foi criada em algum ligar da aplicacao. Esse metodo retorna o tipo ResponseEntity<?> e recebe como 
+parametro a excecao. E dentro dela cria uma instancia do molde do erro e retorna o tipo passando ResponseEntity<?> 
+nos parametros o erro e o HttpStatus. + erro.
