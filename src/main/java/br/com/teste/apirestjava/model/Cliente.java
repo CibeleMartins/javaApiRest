@@ -10,7 +10,7 @@ public class Cliente {
 
     private String email;
 
-    private Long cpf;
+    private String cpf;
 
     private String endereco;
 
@@ -48,11 +48,11 @@ public class Cliente {
         this.email = email;
     }
 
-    public Long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
