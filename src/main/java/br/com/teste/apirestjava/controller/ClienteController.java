@@ -41,7 +41,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    public Cliente atualizar(Integer id, Cliente cliente) {
+    public Cliente atualizar(@PathVariable Integer id, @RequestBody Cliente cliente) {
 
         return clienteService.atualizar(id, cliente);
     }
