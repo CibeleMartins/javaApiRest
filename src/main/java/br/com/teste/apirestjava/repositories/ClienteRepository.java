@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import br.com.teste.apirestjava.model.Cliente;
+import br.com.teste.apirestjava.model.exception.ResourceNotFoundException;
 
 @Repository
 public class ClienteRepository {
@@ -60,7 +61,7 @@ public class ClienteRepository {
 
         if (clienteEncontrado.isEmpty()) {
 
-            throw new InputMismatchException("Cliente não encontrado.");
+            throw new ResourceNotFoundException("Cliente não encontrado.");
         }
 
         deletar(cliente.getId());
