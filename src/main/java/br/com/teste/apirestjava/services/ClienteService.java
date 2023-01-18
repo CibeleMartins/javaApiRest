@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.teste.apirestjava.repositories.ClienteRepository;
 import br.com.teste.apirestjava.model.Cliente;
+import br.com.teste.apirestjava.model.exception.ResourceBadRequestException;
 
 @Service
 public class ClienteService {
@@ -53,6 +54,7 @@ public class ClienteService {
      * @return retorna o cliente atualizado.
      */
     public Cliente atualizar(Integer id, Cliente cliente) {
+
 
         cliente.setId(id);
 

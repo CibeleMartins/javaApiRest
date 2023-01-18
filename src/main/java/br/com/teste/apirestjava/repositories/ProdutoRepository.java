@@ -74,7 +74,7 @@ public class ProdutoRepository {
         if (produtoEncontrado.isEmpty()) {
             // quando ocorre essa exceção ela é "ouvida pelo handler"
             throw new ResourceNotFoundException("Produto não encontrado.");
-        }
+        } 
 
         // Remover o produto antigo da lista
         deletar(produto.getId());
