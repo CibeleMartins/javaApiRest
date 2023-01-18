@@ -1,5 +1,8 @@
 package br.com.teste.apirestjava.model;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Produto {
 
     private Integer id;
