@@ -21,7 +21,7 @@ public class ClienteService {
      * @return lista de Clientes
      */
     public List<Cliente> obterTodos() {
-        return clienteRepository.obterTodos();
+        return clienteRepository.findAll();
     }
 
     /**
@@ -32,7 +32,7 @@ public class ClienteService {
      */
     public Optional<Cliente> obterPeloId(Integer id) {
 
-        return clienteRepository.obterPeloId(id);
+        return clienteRepository.findById(id);
     }
 
     /**
@@ -43,7 +43,8 @@ public class ClienteService {
      */
     public Cliente cadastrar(Cliente cliente) {
 
-        return clienteRepository.cadastrar(cliente);
+        cliente.setId(null);
+        return clienteRepository.save(cliente);
     }
 
     /**
@@ -57,7 +58,7 @@ public class ClienteService {
 
         cliente.setId(id);
 
-        return clienteRepository.atualizar(cliente);
+        return clienteRepository.save(cliente);
 
     }
 
@@ -68,7 +69,7 @@ public class ClienteService {
      */
     public String deletar(Integer id) {
 
-        clienteRepository.deletar(id);
+        clienteRepository.deleteById(id);
 
         return "Cliente deletado com sucesso.";
     }
