@@ -23,7 +23,7 @@ public class ProdutoService {
      */
     public List<Produto> obterTodos() {
 
-        return produtoRepository.obterTodos();
+        return produtoRepository.findAll();
     }
 
     /**
@@ -32,7 +32,7 @@ public class ProdutoService {
      */
     public Optional<Produto> obterPorId(Integer id) {
 
-        return produtoRepository.obterPorId(id);
+        return produtoRepository.findById(id);
     }
 
     /**
@@ -42,22 +42,22 @@ public class ProdutoService {
     public Produto cadastrar(Produto produto) {
         // Poderia ter alguma regra de negocio para adicionar um produto aqui.
         // Ex: obrigatório passar o nome do produto, ou um valor acima de 100
-
-       return produtoRepository.cadastrar(produto);
+        produto.setId(null);
+       return produtoRepository.save(produto);
     }
 
     public void deletar(Integer id) {
         // Poderia ter alguma lógica de validação
         // Ex: ver se o usuário tem permissão para deletar.
         
-        produtoRepository.deletar(id);
+        produtoRepository.deleteById(id);
     }
 
     public Produto atualizar(Integer id, Produto produto) {
 
       produto.setId(id);
 
-      return produtoRepository.atualizar(produto);
+      return produtoRepository.save(produto);
     }
 
 }
