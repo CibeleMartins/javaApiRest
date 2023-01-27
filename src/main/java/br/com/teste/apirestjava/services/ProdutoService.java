@@ -116,7 +116,7 @@ public class ProdutoService {
         produtoRepository.save(produto);
 
         // retornar o produto dto atualizado (tem id? cadastra : atualiza)
-        produtoDto.setId(produto.getId());
+        // produtoDto.setId(produto.getId());
 
         return produtoDto;
      

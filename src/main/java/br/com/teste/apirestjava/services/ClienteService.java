@@ -81,13 +81,17 @@ public class ClienteService {
      * @param cliente cliente a ser atualizado.
      * @return retorna o cliente atualizado.
      */
-    public Cliente atualizar(Integer id, Cliente cliente) {
+    public ClienteDTO atualizar(Integer id, ClienteDTO clienteDto) {
 
+        ModelMapper mapper = new ModelMapper();
 
-        cliente.setId(id);
+        clienteDto.setId(id);
 
-        return clienteRepository.save(cliente);
+        Cliente cliente = mapper.map(clienteDto, Cliente.class);
 
+        clienteRepository.save(cliente);
+
+        return clienteDto;
     }
 
     /**
@@ -96,6 +100,12 @@ public class ClienteService {
      * @param id id do cliente a ser deletado.
      */
     public String deletar(Integer id) {
+
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+
+        if(cliente.isEmpty()) {
+            throw new ResourceNotFoundException("Não é possível deletar o produto de id:  " + id + " porque ele não existe.");
+        }
 
         clienteRepository.deleteById(id);
 
