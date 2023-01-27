@@ -74,12 +74,11 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public String deletar(@PathVariable Integer id) {
+    public ResponseEntity<String> deletar(@PathVariable Integer id) {
         produtoService.deletar(id);
 
-        return "Produto de id " + id + " foi removido.";
+        return new ResponseEntity<>("O produto de id: " + id + " não pode ser deletado porque não existe", HttpStatus.NOT_FOUND );
     }
-
     /**
      * Método que atualiza um produto
      * 
@@ -88,8 +87,16 @@ public class ProdutoController {
      * @return retorna o produto atualizado
      */
     @PutMapping("/{id}")
-    public Produto atualizar(@PathVariable Integer id, @RequestBody Produto produto) {
+    public ResponseEntity<ProdutoResponse> atualizar(@PathVariable Integer id, @RequestBody ProdutoRequest produtoReq) {
 
-        return produtoService.atualizar(id, produto);
+        ModelMapper mapper = new ModelMapper();
+
+        ProdutoDTO produtoDto = mapper.map(produtoReq, ProdutoDTO.class);
+
+       produtoDto = produtoService.atualizar(id, produtoDto);
+
+         ProdutoResponse produtoResp = mapper.map(produtoDto, ProdutoResponse.class);
+
+        return new ResponseEntity<>(produtoResp, HttpStatus.OK);
     }
 }

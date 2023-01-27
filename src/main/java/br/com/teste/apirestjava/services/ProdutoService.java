@@ -93,7 +93,7 @@ public class ProdutoService {
         Optional<Produto> produto = produtoRepository.findById(id);
 
         if(produto.isEmpty()) {
-            throw new ResourceNotFoundException("Não é possível deleter o produto de id:  " + id + " porque ele não existe.");
+            throw new ResourceNotFoundException("Não é possível deletar o produto de id:  " + id + " porque ele não existe.");
         }
 
         produtoRepository.deleteById(id);
