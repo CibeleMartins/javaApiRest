@@ -1,7 +1,10 @@
-package br.com.teste.apirestjava.shared;
+package br.com.teste.apirestjava.view.model;
 
-public class ProdutoDTO {
-    private Integer id;
+public class ProdutoRequest {
+
+    // o id nao é esperado no corpo de nenhuma das requisicoes
+    // diante disso, no modelo request pode ser ignorado
+    // private Integer id;
 
     private String nome;
 
@@ -11,13 +14,13 @@ public class ProdutoDTO {
     
     private String observacao;
 
-    public Integer getId() {
-        return id;
-    }
+    // public Integer getId() {
+    //     return id;
+    // }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    // public void setId(Integer id) {
+    //     this.id = id;
+    // }
 
     public String getNome() {
         return nome;
