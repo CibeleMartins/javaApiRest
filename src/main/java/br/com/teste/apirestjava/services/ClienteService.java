@@ -62,10 +62,17 @@ public class ClienteService {
      * @param cliente cliente a ser cadastrado
      * @return retorna o cliente cadatrado
      */
-    public Cliente cadastrar(Cliente cliente) {
+    public ClienteDTO cadastrar(ClienteDTO clienteDto) {
 
-        cliente.setId(null);
-        return clienteRepository.save(cliente);
+        clienteDto.setId(null);
+        Cliente cliente = new ModelMapper().map(clienteDto, Cliente.class);
+
+
+       cliente = clienteRepository.save(cliente);
+
+       clienteDto.setId(cliente.getId());
+
+       return clienteDto;
     }
 
     /**
