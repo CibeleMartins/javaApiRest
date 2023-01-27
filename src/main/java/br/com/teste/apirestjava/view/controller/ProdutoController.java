@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.teste.apirestjava.model.Produto;
 import br.com.teste.apirestjava.services.ProdutoService;
 import br.com.teste.apirestjava.shared.ProdutoDTO;
+import br.com.teste.apirestjava.view.model.ProdutoRequest;
 import br.com.teste.apirestjava.view.model.ProdutoResponse;
 
 @RestController
@@ -39,24 +40,37 @@ public class ProdutoController {
 
         List<ProdutoResponse> produtoResp = produtoDto.stream()
                 .map(pDto -> mapper.map(produtoDto, ProdutoResponse.class)).collect(Collectors.toList());
-        
+
         // retorna uma resposta c/ um status - uma classe que trabalha com respostas
         return new ResponseEntity<>(produtoResp, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<ProdutoResponse>> obterPorId(@PathVariable Integer id) {
-
-        
+        // se n tiver exceção usa try catch, se não lança a execeção.
+    //    try {
         Optional<ProdutoDTO> dto = produtoService.obterPorId(id);
 
         ProdutoResponse produto = new ModelMapper().map(dto.get(), ProdutoResponse.class);
         return new ResponseEntity<>(Optional.of(produto), HttpStatus.OK);
+    //    } catch (Exception e) {
+    //         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    //    }
     }
 
     @PostMapping
-    public Produto cadastrar(@RequestBody Produto produto) {
-        return produtoService.cadastrar(produto);
+    public ResponseEntity<ProdutoResponse> cadastrar(@RequestBody ProdutoRequest produtoReq) {
+
+        ModelMapper mapper = new ModelMapper();
+
+        ProdutoDTO dto = mapper.map(produtoReq, ProdutoDTO.class);
+        
+        dto = produtoService.cadastrar(dto);
+
+        ProdutoResponse produtoResp = mapper.map(dto, ProdutoResponse.class);
+
+        return new ResponseEntity<>(produtoResp, HttpStatus.CREATED);
+
     }
 
     @DeleteMapping("/{id}")
