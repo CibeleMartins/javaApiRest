@@ -3,8 +3,10 @@ package br.com.teste.apirestjava.view.controller;
 import java.util.List;
 import java.util.Optional;
 
-
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.teste.apirestjava.model.Cliente;
 // import br.com.teste.apirestjava.model.exception.ResourceBadRequestException;
 import br.com.teste.apirestjava.services.ClienteService;
+import br.com.teste.apirestjava.shared.ClienteDTO;
+import br.com.teste.apirestjava.view.model.ClienteRequest;
+import br.com.teste.apirestjava.view.model.ClienteResponse;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -26,20 +31,27 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping
-    public List<Cliente> obterTodos() {
+    public List<ClienteDTO> obterTodos() {
         return clienteService.obterTodos();
     }
 
     @GetMapping("/{id}")
-    public Optional<Cliente> obterPeloId(@PathVariable Integer id) {
+    public Optional<ClienteDTO> obterPeloId(@PathVariable Integer id) {
 
         return clienteService.obterPeloId(id);
     }
 
     @PostMapping
-    public Cliente cadastrar(@RequestBody Cliente cliente) {
+    public ResponseEntity<ClienteResponse> cadastrar(@RequestBody ClienteRequest clienteReq) {
 
-        return clienteService.cadastrar(cliente);
+        ModelMapper mapper = new ModelMapper();
+        ClienteDTO clienteDto = mapper.map(clienteReq, ClienteDTO.class);
+
+        clienteDto = clienteService.cadastrar(clienteDto);
+
+        ClienteResponse clienteResp = mapper.map(clienteDto, ClienteResponse.class);
+
+        return new ResponseEntity<ClienteResponse>(clienteResp, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
