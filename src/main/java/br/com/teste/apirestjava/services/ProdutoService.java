@@ -13,7 +13,7 @@ import br.com.teste.apirestjava.model.Produto;
 import br.com.teste.apirestjava.model.exception.ResourceNotFoundException;
 import br.com.teste.apirestjava.repositories.ProdutoRepository;
 import br.com.teste.apirestjava.shared.ProdutoDTO;
-import br.com.teste.apirestjava.view.model.ProdutoRequest;
+// import br.com.teste.apirestjava.view.model.ProdutoRequest;
 
 @Service
 public class ProdutoService {

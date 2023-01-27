@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.teste.apirestjava.model.Produto;
+// import br.com.teste.apirestjava.model.Produto;
 import br.com.teste.apirestjava.services.ProdutoService;
 import br.com.teste.apirestjava.shared.ProdutoDTO;
 import br.com.teste.apirestjava.view.model.ProdutoRequest;
@@ -79,6 +79,7 @@ public class ProdutoController {
 
         return new ResponseEntity<>("O produto de id: " + id + " não pode ser deletado porque não existe", HttpStatus.NOT_FOUND );
     }
+
     /**
      * Método que atualiza um produto
      * 
