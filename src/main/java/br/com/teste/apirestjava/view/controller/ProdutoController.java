@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +30,7 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @GetMapping
-    public List<ProdutoResponse> obterTodos() {
+    public ResponseEntity<List<ProdutoResponse>> obterTodos() {
 
         // converter a lista de dto em lista re produto response
         List<ProdutoDTO> produtoDto = produtoService.obterTodos();
@@ -38,13 +40,18 @@ public class ProdutoController {
         List<ProdutoResponse> produtoResp = produtoDto.stream()
                 .map(pDto -> mapper.map(produtoDto, ProdutoResponse.class)).collect(Collectors.toList());
         
-        return produtoResp;
+        // retorna uma resposta c/ um status - uma classe que trabalha com respostas
+        return new ResponseEntity<>(produtoResp, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Optional<ProdutoResponse> obterPorId(@PathVariable Integer id) {
+    public ResponseEntity<Optional<ProdutoResponse>> obterPorId(@PathVariable Integer id) {
 
-        return produtoService.obterPorId(id);
+        
+        Optional<ProdutoDTO> dto = produtoService.obterPorId(id);
+
+        ProdutoResponse produto = new ModelMapper().map(dto.get(), ProdutoResponse.class);
+        return new ResponseEntity<>(Optional.of(produto), HttpStatus.OK);
     }
 
     @PostMapping
