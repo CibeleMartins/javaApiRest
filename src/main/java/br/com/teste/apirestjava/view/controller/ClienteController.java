@@ -1,4 +1,4 @@
-package br.com.teste.apirestjava.controller;
+package br.com.teste.apirestjava.view.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.teste.apirestjava.model.Cliente;
-import br.com.teste.apirestjava.model.exception.ResourceBadRequestException;
+// import br.com.teste.apirestjava.model.exception.ResourceBadRequestException;
 import br.com.teste.apirestjava.services.ClienteService;
 
 @RestController

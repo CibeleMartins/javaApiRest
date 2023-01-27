@@ -1,4 +1,4 @@
-package br.com.teste.apirestjava.controller;
+package br.com.teste.apirestjava.view.controller;
 
 import java.util.List;
 import java.util.Optional;
