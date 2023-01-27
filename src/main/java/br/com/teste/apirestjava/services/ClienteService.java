@@ -2,12 +2,17 @@ package br.com.teste.apirestjava.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.asm.commons.ModuleRemapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.teste.apirestjava.repositories.ClienteRepository;
+import br.com.teste.apirestjava.shared.ClienteDTO;
 import br.com.teste.apirestjava.model.Cliente;
+import br.com.teste.apirestjava.model.exception.ResourceNotFoundException;
 
 @Service
 public class ClienteService {
@@ -20,8 +25,14 @@ public class ClienteService {
      * 
      * @return lista de Clientes
      */
-    public List<Cliente> obterTodos() {
-        return clienteRepository.findAll();
+    public List<ClienteDTO> obterTodos() {
+
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        List<ClienteDTO> clientesDto = clientes.stream().map(c -> new ModelMapper().map(c, ClienteDTO.class)).collect(Collectors.toList());
+
+        return clientesDto;
+        
     }
 
     /**
@@ -30,9 +41,19 @@ public class ClienteService {
      * @param cliente cliente a ser cadastrado
      * @return retorna o cliente cadatrado
      */
-    public Optional<Cliente> obterPeloId(Integer id) {
+    public Optional<ClienteDTO> obterPeloId(Integer id) {
 
-        return clienteRepository.findById(id);
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+
+        if(cliente.isEmpty()) {
+            throw new ResourceNotFoundException("Cliente não encontrado. Id -> " + id);
+        }
+
+        ModelMapper mapper = new ModelMapper();
+
+        ClienteDTO clienteDto = mapper.map(cliente, ClienteDTO.class);
+
+        return Optional.of(clienteDto);
     }
 
     /**
