@@ -2,6 +2,7 @@ package br.com.teste.apirestjava.view.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.teste.apirestjava.model.Cliente;
+// import br.com.teste.apirestjava.model.Cliente;
 // import br.com.teste.apirestjava.model.exception.ResourceBadRequestException;
 import br.com.teste.apirestjava.services.ClienteService;
 import br.com.teste.apirestjava.shared.ClienteDTO;
@@ -31,14 +32,24 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping
-    public List<ClienteDTO> obterTodos() {
-        return clienteService.obterTodos();
+    public ResponseEntity<List<ClienteResponse>> obterTodos() {
+
+        List<ClienteDTO> clientesDtos = clienteService.obterTodos();
+
+        List<ClienteResponse> clientesResp = clientesDtos.stream()
+                .map(c -> new ModelMapper().map(clientesDtos, ClienteResponse.class)).collect(Collectors.toList());
+        
+        return new ResponseEntity<>(clientesResp, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Optional<ClienteDTO> obterPeloId(@PathVariable Integer id) {
+    public ResponseEntity<Optional<ClienteResponse>> obterPeloId(@PathVariable Integer id) {
 
-        return clienteService.obterPeloId(id);
+       Optional<ClienteDTO> clienteDto = clienteService.obterPeloId(id);
+
+       ClienteResponse clienteResp = new ModelMapper().map(clienteDto, ClienteResponse.class);
+
+       return new ResponseEntity<>(Optional.of(clienteResp), HttpStatus.OK);
     }
 
     @PostMapping
@@ -51,22 +62,28 @@ public class ClienteController {
 
         ClienteResponse clienteResp = mapper.map(clienteDto, ClienteResponse.class);
 
-        return new ResponseEntity<ClienteResponse>(clienteResp, HttpStatus.CREATED);
+        return new ResponseEntity<>(clienteResp, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public Cliente atualizar(@PathVariable Integer id, @RequestBody Cliente cliente) {
+    public ResponseEntity<ClienteResponse> atualizar(@PathVariable Integer id, @RequestBody ClienteRequest clienteReq) {
 
-      
-        return clienteService.atualizar(id, cliente);
-        
+
+        ClienteDTO clienteDto = new ModelMapper().map(clienteReq, ClienteDTO.class);
+
+        clienteDto = clienteService.atualizar(id, clienteDto);
+
+        ClienteResponse clienteResp = new ModelMapper().map(clienteDto, ClienteResponse.class);
+
+        return new ResponseEntity<>(clienteResp, HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{id}")
-    public String deletar(Integer id) {
+    public ResponseEntity<String> deletar(Integer id) {
 
         clienteService.deletar(id);
 
-        return "Cliente deletado com sucesso.";
+        return new ResponseEntity<>("Cliente de id -> " + id + " deletado com sucesso.", HttpStatus.OK);
     }
 }
