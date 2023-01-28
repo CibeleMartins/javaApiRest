@@ -39,7 +39,7 @@ public class ClienteController {
         List<ClienteResponse> clientesResp = clientesDtos.stream()
                 .map(c -> new ModelMapper().map(clientesDtos, ClienteResponse.class)).collect(Collectors.toList());
         
-        return new ResponseEntity<>(clientesResp, HttpStatus.OK);
+        return new ResponseEntity<List<ClienteResponse>>(clientesResp, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -47,7 +47,7 @@ public class ClienteController {
 
        Optional<ClienteDTO> clienteDto = clienteService.obterPeloId(id);
 
-       ClienteResponse clienteResp = new ModelMapper().map(clienteDto, ClienteResponse.class);
+       ClienteResponse clienteResp = new ModelMapper().map(clienteDto.get(), ClienteResponse.class);
 
        return new ResponseEntity<>(Optional.of(clienteResp), HttpStatus.OK);
     }
@@ -80,7 +80,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletar(Integer id) {
+    public ResponseEntity<String> deletar(@PathVariable Integer id) {
 
         clienteService.deletar(id);
 

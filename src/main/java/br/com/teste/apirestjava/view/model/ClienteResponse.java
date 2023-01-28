@@ -31,14 +31,5 @@ public class ClienteResponse {
         this.sobrenome = sobrenome;
     }
 
-
-    public String getNumeroTelefone() {
-        return numeroTelefone;
-    }
-
-    public void setNumeroTelefone(String numeroTelefone) {
-        this.numeroTelefone = numeroTelefone;
-    }
-
-    private String numeroTelefone;
+ 
 }

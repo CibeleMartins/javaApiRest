@@ -32,7 +32,7 @@ public class ProdutoService {
 
         // o bd retorna uma lista de produtos
         List<Produto> produtos = produtoRepository.findAll();
-
+        System.out.print(produtos);
         // converter em uma lista de produto DTO
         return produtos.stream().map(p -> new ModelMapper().map(p, ProdutoDTO.class)).collect(Collectors.toList());
     }

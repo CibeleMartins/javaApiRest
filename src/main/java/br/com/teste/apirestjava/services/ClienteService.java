@@ -50,7 +50,7 @@ public class ClienteService {
 
         ModelMapper mapper = new ModelMapper();
 
-        ClienteDTO clienteDto = mapper.map(cliente, ClienteDTO.class);
+        ClienteDTO clienteDto = mapper.map(cliente.get(), ClienteDTO.class);
 
         return Optional.of(clienteDto);
     }

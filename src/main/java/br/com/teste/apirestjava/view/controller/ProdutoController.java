@@ -77,7 +77,7 @@ public class ProdutoController {
     public ResponseEntity<String> deletar(@PathVariable Integer id) {
         produtoService.deletar(id);
 
-        return new ResponseEntity<>("O produto de id: " + id + " não pode ser deletado porque não existe", HttpStatus.NOT_FOUND );
+        return new ResponseEntity<>("O produto de id: " + id + " foi deletado com sucesso.", HttpStatus.OK );
     }
 
     /**
