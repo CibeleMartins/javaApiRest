@@ -36,10 +36,9 @@ public class ClienteController {
 
         List<ClienteDTO> clientesDtos = clienteService.obterTodos();
 
-        List<ClienteResponse> clientesResp = clientesDtos.stream()
-                .map(c -> new ModelMapper().map(clientesDtos, ClienteResponse.class)).collect(Collectors.toList());
+        List<ClienteResponse> clientesResp = clientesDtos.stream().map(c -> new ModelMapper().map(clientesDtos, ClienteResponse.class)).collect(Collectors.toList());
         
-        return new ResponseEntity<List<ClienteResponse>>(clientesResp, HttpStatus.OK);
+        return new ResponseEntity<>(clientesResp, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

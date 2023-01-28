@@ -28,6 +28,8 @@ public class ClienteService {
 
         List<Cliente> clientes = clienteRepository.findAll();
 
+        System.out.print(clientes);
+
         List<ClienteDTO> clientesDto = clientes.stream().map(c -> new ModelMapper().map(c, ClienteDTO.class)).collect(Collectors.toList());
 
         return clientesDto;
