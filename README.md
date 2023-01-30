@@ -1,8 +1,9 @@
-#Seja Bem-Vindo a API-REST-JAVA!
+
+# Seja Bem-Vindo a API-REST-JAVA!
 
 <br />
 <p align="center">
-    <img src='./src/main/java/br/com/teste/apirestjava/assets/logo.png' alt="Logo" width="200">
+    <img src='./src/main/java/br/com/teste/apirestjava/assets/logo.png' alt="Logo" width="400">
 
   <h3 align="center"></h3>
  <br />
@@ -30,7 +31,7 @@ Este projeto foi desenvolvido durante um curso que eu concluí no meu estágio d
 ## Conhecimentos Praticados
 
 ✔ Java <br>
-✔ Spring Boot 
+✔ Spring Boot <br>
 ✔ MVC <br>
 ✔ DTO <br>
 
