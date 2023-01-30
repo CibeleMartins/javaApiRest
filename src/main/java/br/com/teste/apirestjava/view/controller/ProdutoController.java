@@ -30,13 +30,16 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
+    @Autowired
+    private ModelMapper mapper;
+
     @GetMapping
     public ResponseEntity<List<ProdutoResponse>> obterTodos() {
 
         // converter a lista de dto em lista re produto response
         List<ProdutoDTO> produtoDto = produtoService.obterTodos();
 
-        ModelMapper mapper = new ModelMapper();
+        // ModelMapper mapper = new ModelMapper();
 
         List<ProdutoResponse> produtoResp = produtoDto.stream()
                 .map(pDto -> mapper.map(produtoDto, ProdutoResponse.class)).collect(Collectors.toList());
@@ -51,7 +54,7 @@ public class ProdutoController {
     //    try {
         Optional<ProdutoDTO> dto = produtoService.obterPorId(id);
 
-        ProdutoResponse produto = new ModelMapper().map(dto.get(), ProdutoResponse.class);
+        ProdutoResponse produto = mapper.map(dto.get(), ProdutoResponse.class);
         return new ResponseEntity<>(Optional.of(produto), HttpStatus.OK);
     //    } catch (Exception e) {
     //         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -61,7 +64,7 @@ public class ProdutoController {
     @PostMapping
     public ResponseEntity<ProdutoResponse> cadastrar(@RequestBody ProdutoRequest produtoReq) {
 
-        ModelMapper mapper = new ModelMapper();
+        // ModelMapper mapper = new ModelMapper();
 
         ProdutoDTO dto = mapper.map(produtoReq, ProdutoDTO.class);
         
@@ -90,7 +93,7 @@ public class ProdutoController {
     @PutMapping("/{id}")
     public ResponseEntity<ProdutoResponse> atualizar(@PathVariable Integer id, @RequestBody ProdutoRequest produtoReq) {
 
-        ModelMapper mapper = new ModelMapper();
+        // ModelMapper mapper = new ModelMapper();
 
         ProdutoDTO produtoDto = mapper.map(produtoReq, ProdutoDTO.class);
 

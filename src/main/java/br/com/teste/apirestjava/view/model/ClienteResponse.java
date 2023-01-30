@@ -6,7 +6,7 @@ public class ClienteResponse {
     private String nome;
 
     private String sobrenome;
-    
+
     public Integer getId() {
         return id;
     }
@@ -31,5 +31,4 @@ public class ClienteResponse {
         this.sobrenome = sobrenome;
     }
 
- 
 }
