@@ -10,10 +10,6 @@ public class ClienteDTO {
     private String email;
 
     private String cpf;
-
-    private String endereco;
-
-    private String complemento;
     
     public Integer getId() {
         return id;
@@ -53,22 +49,6 @@ public class ClienteDTO {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
     }
 
     public String getNumeroTelefone() {

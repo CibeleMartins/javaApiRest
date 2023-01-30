@@ -17,11 +17,15 @@ import br.com.teste.apirestjava.shared.ProdutoDTO;
 
 @Service
 public class ProdutoService {
-
-    @Autowired
+    
+    
     // devolve uma instancia pronta do repositorio do produto sem precisar
     // instanciar.
+    @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private ModelMapper mapper;
 
     /**
      * Método que aciona o repositório para obter todos os produtos.
@@ -32,9 +36,9 @@ public class ProdutoService {
 
         // o bd retorna uma lista de produtos
         List<Produto> produtos = produtoRepository.findAll();
-        System.out.print(produtos);
+      
         // converter em uma lista de produto DTO
-        return produtos.stream().map(p -> new ModelMapper().map(p, ProdutoDTO.class)).collect(Collectors.toList());
+        return produtos.stream().map(p -> mapper.map(p, ProdutoDTO.class)).collect(Collectors.toList());
     }
 
     /**
@@ -51,7 +55,7 @@ public class ProdutoService {
             throw new ResourceNotFoundException("Produto de id: " + id + " não encontrado.");
         }
 
-        ProdutoDTO dto = new ModelMapper().map(produtoId.get(), ProdutoDTO.class);
+        ProdutoDTO dto = mapper.map(produtoId.get(), ProdutoDTO.class);
         // o método get() pega o retorno do Optional
 
         return Optional.of(dto);
@@ -71,7 +75,7 @@ public class ProdutoService {
         produtoDto.setId(null);
      
         // cria um objeto de mapeamento
-        ModelMapper mapper = new ModelMapper();
+        // ModelMapper mapper = new ModelMapper();
 
         // converter o produto dto em um produto model p/ mandar pro bd
         Produto produto = mapper.map(produtoDto, Produto.class);
@@ -106,7 +110,7 @@ public class ProdutoService {
 
         // Criar um objeto de mapeamento
 
-        ModelMapper mapper = new ModelMapper();
+        // ModelMapper mapper = new ModelMapper();
 
         // Converter o DTO em model de Produto
 
