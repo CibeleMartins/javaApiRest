@@ -56,7 +56,7 @@ Este projeto foi desenvolvido durante um curso que eu concluí no meu estágio d
       "args": "",
       "envFile": "${workspaceFolder}/.env",
       "env": {
-        "DB_CHECK_LEARNING_URL": "URL DO BANCO DE DADOS",
+        "DB_URL": "URL DO BANCO DE DADOS",
         "DB_USERNAME": "NOME DE LOGIN NO SEU BANCO DE DADOS",
         "DB_PASSWORD": "SENHA DO SEU BANCO DE DADOS"
       }
